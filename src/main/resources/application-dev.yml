@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc://mysql://45.40.252.175:3306/test
+    username: yan96in
+    password: yan96inA!
+  data:
+    mongodb:
+      uri: mongodb://45.40.252.175/test
+
+      
