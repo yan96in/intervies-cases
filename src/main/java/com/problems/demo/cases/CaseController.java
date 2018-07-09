@@ -14,7 +14,7 @@ public class CaseController {
     @Autowired
     private CaseService caseService;
     @GetMapping("/case/{type}")
-    public List<IcCase> list(@PathVariable int type){
+    public List<IcCase> list(@PathVariable("type") int type){
         Assert.notNull(type,"u must assign the type value");
         return this.caseService.list(type);
     }
