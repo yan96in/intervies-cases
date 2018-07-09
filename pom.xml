@@ -27,6 +27,10 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 		<dependency>
@@ -86,9 +90,10 @@
 				<version>1.3.2</version>
 				<configuration>
 					<!--配置文件的位置-->
-					<configurationFile>mybatis-generator-configs/relations.xml</configurationFile>
-					<configurationFile>mybatis-generator-configs/case_type.xml</configurationFile>
+
 					<configurationFile>mybatis-generator-configs/case.xml</configurationFile>
+					<configurationFile>mybatis-generator-configs/case_type.xml</configurationFile>
+					<configurationFile>mybatis-generator-configs/relations.xml</configurationFile>
 
 					<verbose>true</verbose>
 					<overwrite>true</overwrite>

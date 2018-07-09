@@ -3,3 +3,7 @@ bugs:
 ----
 todo:
 - spring security
+- transactional
+- log
+- advanced mybatis
+- 
