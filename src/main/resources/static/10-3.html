@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用WebSocket对象传送数据</title>
+</head>
+<body onload="pageload();">
+<fieldset>
+    <legend>使用JSON对象传输</legend>
+    <div>
+        <span>
+            <b>对话记录</b>
+            <span class="p1140">
+                <b>在线人员</b>
+            </span>
+        </span>
+    </div>
+    <textarea name="" id="txtaList" cols="26" rows="12" readonly="readonly">
+
+</textarea><br>
+    <textarea name="" id="txtaUser" cols="10" rows="12"></textarea>
+
+    <input type="text" id="txtMessage">
+    <input type="button" id="btnAdd" value="发送" onclick="btnSend_Click();">
+
+</fieldset>
+<script>
+    function $$(id) {
+        return document.getElementById(id);
+    }
+
+    var strList = "";
+    var strUser = "";
+    var objWs = null;
+    var conUrl = "ws://localhost:3131/test/JSON";
+    var SocketCreated = false;
+    var arrState = new Array("正在建立连接...", "连接成功!", "正在关闭连接...", "连接已关闭!", "正在初始化值...", "连接出错!");
+
+    function pageload() {
+        if (SocketCreated && (objWs.readyState == 0 || objWs.readyState == 1)) {
+            objWs.close();
+        } else {
+            Handle_List(arrState[4]);
+            try {
+                objWs = new WebSocket(conUrl);
+                SocketCreated = true;
+            } catch (ex) {
+                Handle_List(ex);
+                return;
+            }
+        }
+
+        objWs.onopen = function (ev) {
+            Handle_List(arrState[objWs.readyState]);
+        }
+
+        objWs.onmessage = function (ev) {
+            var objJSON = JSON.parse(event.data);
+            for (var intI = 0; intI < objJSON.length; i++) {
+                Handle_User(objJSON[intI].UserName);
+                Handle_User(objJSON[intI].Status);
+            }
+        }
+        objWs.onclose = function () {
+            Handle_List(arrState[objWs.readyState]);
+        }
+
+        objWs.onerror = function () {
+            Handle_List(arrState[5]);
+        }
+    }
+
+    function btnSend_Click() {
+        var strTxtMessage = $$('txtMessage').value;
+        var strTime = new Date();
+        if (strTxtMessage.length > 0) {
+            objWs.send(JSON.stringify({
+                content: strTxtMessage,
+                datetime: strTime.toLocaleDateString()
+            }));
+            Handle_List(strTime.toLocaleDateString());
+            Handle_List("我说:" + strTxtMessage);
+            $$('txtMessage').value = "";
+        }
+    }
+
+    function Handle_List(message) {
+        strList += message + "\n";
+        $$('txtaList').innerHTML = strList;
+    }
+
+    function Handle_User(message) {
+        strUser += message + "\n";
+        $$('txtaUser').innerHTML = strUser;
+    }
+</script>
+</body>
+</html>

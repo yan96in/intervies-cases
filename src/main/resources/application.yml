@@ -11,6 +11,10 @@ spring:
     user:
       password: 111111
       name: user
+  mvc:
+    view:
+      prefix: ''
+      suffix: ''
 
 
       

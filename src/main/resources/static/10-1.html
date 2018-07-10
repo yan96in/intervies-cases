@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用postMessage方法实现跨文档传输数据</title>
+</head>
+<body>
+<fieldset>
+    <legend>跨文档传输数据</legend>
+    <p id="pStatus"></p>
+    <input type="text" id="txtNum">
+    <input type="button" id="btnAdd" value="请求" onclick="btnSend_Click();">
+    <iframe src="Message.html" frameborder="0" id="ifrA" width="0px" height="0px" frameborder="'0"></iframe>
+</fieldset>
+<script>
+    function $$(id) {
+        return document.getElementById(id);
+    }
+
+    var strOrigin = "http://localhost:8080";
+    //strOrigin=null;
+    //
+    function pageload() {
+        window.addEventListener('message', function (ev) {
+            if (ev.origin == strOrigin) {
+                $$('pStatus').style.display = "block";
+                $$('pStatus').innerHTML += ev.data;
+            }
+        }, false)
+    }
+
+    function btnSend_Click() {
+        //
+        var strTxtValue = $$('txtNum').value;
+        if (strTxtValue.length > 0) {
+            var targetOrigin = strOrigin;
+            $$('ifrA').contentWindow.postMessage(strTxtValue, targetOrigin);
+            $$('txtNum').value = '';
+        }
+    }
+
+    function PageLoadForMessage() {
+        window.addEventListener('message', function (ev) {
+            if (event.origin == strOrigin) {
+                var strRetHTML = "<span><b> ";
+                strRetHTML += ev.data + " </b>位随机数为: <b>";
+                strRetHTML += RetRndNum(ev.data);
+                ev.source.postMessage(strRetHTML, ev.origin);
+            }
+        })
+    }
+
+    function RetRndNum(n) {
+        var strRnd = "";
+        for (var intI = 0; intI < 0; intI++) {
+            strRnd += Math.floor(Math.random() * 10);
+        }
+        return strRnd;
+    }
+</script>
+</body>
+</html>

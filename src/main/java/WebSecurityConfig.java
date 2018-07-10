@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${spring.profiles}")
     private String env;
 
@@ -19,18 +19,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			http.httpBasic();
 			return;
 		}*/
-
+        http.headers().frameOptions().disable();
         http
                 .formLogin().loginPage("/login.html").loginProcessingUrl("/login").permitAll()
+                .defaultSuccessUrl("index.html").failureUrl("error.html")
+
                 .and()
                 .logout().logoutUrl("/logout")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login.html", "/**/*.css", "/img/**", "/api/**") //放开"/api/**"：为了给被监控端免登录注册
-                .permitAll()
+              //  .antMatchers("/login.html", "/**/*.css", "/img/**", "/api/**") //放开"/api/**"：为了给被监控端免登录注册
+               // .permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/**").authenticated();
-        http.csrf().disable();
+        http.csrf();
         http.httpBasic();
     }
 }
