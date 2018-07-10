@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="pageload();">
+<div class="wPub">
+    <div class="wPub">
+        <div id="divDrag" draggable="true">drag</div>
+        <div id="divTip"></div>
+    </div>
+    <div id="divArea">area</div>
+</div>
+<script>
+    function $$(id) {
+        return document.getElementById(id);
+    }
+
+    function pageload() {
+        var Drag = $$('divDrag');
+        var Area = $$('divArea');
+        var objImg = document.createElement("img");
+        objImg.src = "Images/img01.jpg";
+        Drag.addEventListener("dragstart", function (e) {
+            var objDtf = e.dataTransfer;
+            objDtf.effectAllowed = "all";//copy,move,link,none,all
+            objDtf.setData("text/plain", "拖动时动画效果");
+        }, false);
+        //
+        Area.addEventListener('dragover', function (e) {
+            var objDtf = e.dataTransfer;
+            objDtf.dropEffect = "copy";//copy,move,link,none
+            e.preventDefault();
+        }, false);
+        //
+        Area.addEventListener('drop', function (e) {
+            var objDtf = e.dataTransfer;
+            var strText = objDtf.getData("text/plain");
+            Area.textContent += strText;
+            e.preventDefault();
+            e.stopPropagation();
+        }, false);
+    }
+    //
+    document.ondragover = function (ev) {
+        ev.preventDefault();
+    }
+    //
+    document.ondrop = function (ev) {
+        ev.preventDefault();
+    }
+</script>
+</body>
+</html>

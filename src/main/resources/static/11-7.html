@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用拖放API将图片拖入回收站</title>
+</head>
+<body onload="pageload();">
+<div class="wPub">
+    <ul>
+        <li id="li01"><img src="" alt="img1"></li>
+        <li id="li02"><img src="" alt="img2"></li>
+        <li id="li03"><img src="" alt="img3"></li>
+    </ul>
+    <p id="pStatus"></p>
+    <div id="divRecycle">area</div>
+</div>
+<script>
+    function $$(id) {
+        return document.getElementById(id);
+    }
+    var intDeleNum=0;
+    function pageload() {
+        var Drag = document.getElementsByTagName("li");
+        for (var intI = 0; intI < Drag.length; intI++) {
+            Drag[intI].addEventListener("dragstart", function (e) {
+                var objDtf = e.dataTransfer;
+                objDtf.setData("text/plain", this.id)
+            }, false);
+        }
+        var Recy=$$('divRecycle');
+        //
+        Recy.addEventListener("drop",function (e) {
+            var objDtf=e.dataTransfer;
+            var intVal=objDtf.getData("text/plain");
+            Drop_Event(intVal);
+            Recy.className="HaveRyl";
+        },false)
+
+
+    }
+
+    document.ondragover = function (ev) {
+        ev.preventDefault();
+    }
+
+    document.ondrop = function (ev) {
+        ev.preventDefault();
+    }
+    
+    function Drop_Event(Id) {
+        var Node=$$(Id);
+        Node.parentNode.removeChild(Node);
+        intDeleNum++;
+        $$("pStatus").style.display="block";
+        $$("pStatus").innerHTML="已成功删除"+intDeleNum+"张图片";
+    }
+</script>
+</body>
+</html>

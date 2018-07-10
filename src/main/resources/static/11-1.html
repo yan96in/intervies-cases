@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="pageload();">
+<div id="divFrame">
+    <div id="divTitle" style="border:black solid 1px">请不要拖动我</div>
+    <ul>
+        <li>draggable dragstart drop dragleave </li>
+        <li>dataTransfer effectAllowed dropEffect items types files setDate getData setDragImage clearData</li>
+        <li>effectAllowed:all,copy,move,none,copyLink,copyMove,link,linkMove,uninitialized</li>
+        <li>dataTransfer的format对象text/plain,text/html,text/xml,text/url-list</li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script>
+    function $$(id) {
+        return document.getElementById(id);
+    }
+
+    var started;
+    var initX, initY, offsetX, offsetY;
+
+    function pageload() {
+        var divTitle = $$('divTitle');
+        var divFrame = $$('divFrame');
+        divFrame.style.left = 30 + "px";
+        divFrame.style.top = 20 + "px";
+        //event on mouse down
+        divTitle.onmousedown = function (e) {
+            started = true;
+            initX = parseInt(divFrame.style.left);
+            initY = parseInt(divFrame.style.top);
+            offsetX = e.clientX;
+            offsetY = e.clientY;
+        };
+        //event on mouse move
+        divFrame.onmousemove = function (e) {
+            if (started) {
+                var x = e.clientX - offsetX + initX;
+                var y = e.clientY - offsetY + initY;
+                divFrame.style.left = x + "px";
+                divFrame.style.top = y + "px";
+                divTitle.innerHTML = "已拖动";
+            }
+        };
+        //event on mouse up
+        divFrame.onmouseup = function (e) {
+            started = false;
+            document.onmousemove = null;
+        }
+        //
+
+    }
+</script>
+</body>
+</html>

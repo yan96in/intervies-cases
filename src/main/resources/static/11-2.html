@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="pageload();">
+<div class="wPub">
+    <div class="wPub">
+        <div id="divDrag" draggable="true">drag</div>
+        <div id="divTips"></div>
+    </div>
+    <div id="divArea">area</div>
+</div>
+<script>
+    function $$(id) {
+        return document.getElementById(id);
+    }
+
+    function pageload() {
+        var Drag = $$('divDrag');
+        var Area = $$('divArea');
+        Drag.addEventListener("dragstart", function (e) {
+            Status_Handler("元素正在拖动...")
+        });
+        Area.addEventListener("drop", function (e) {
+            Status_Handler("元素拖动成功!")
+        })
+        Area.addEventListener("dragleave", function (e) {
+            Status_Handler("拖动元素正在离开...")
+        })
+
+        //
+        function Status_Handler(message) {
+            $$("divTips").innerHTML += message + "</br>";
+        }
+
+
+    }
+
+    document.ondragover = function (ev) {
+        ev.preventDefault();
+    }
+
+    document.ondrop = function (ev) {
+        ev.preventDefault();
+    }
+</script>
+</body>
+</html>
