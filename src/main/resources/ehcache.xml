@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--idea配置echache.xml报错Cannot resolve file 'ehcache.xsd'  https://www.cnblogs.com/liaojie970/p/8270570.html -->
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+    <diskStore path="java.io.tmpdir/Tmp_EhCache"/>
+    <defaultCache eternal="false" maxElementsInMemory="1000" overflowToDisk="false" diskPersistent="false"
+                  timeToIdleSeconds="0" timeToLiveSeconds="3600" memoryStoreEvictionPolicy="LRU"/>
+    <cache name="content"
+           maxEntriesLocalHeap="200"
+           timeToLiveSeconds="3600"
+           timeToIdleSeconds="3600"
+           maxEntriesLocalDisk="10000000"
+           memoryStoreEvictionPolicy="LRU"
+    >
+    </cache>
+    <cache name="content2">
+
+    </cache>
+
+</ehcache>

@@ -11,6 +11,9 @@ spring:
     user:
       password: 111111
       name: user
+  cache:
+    ehcache:
+      config: classpath*:ehcache.xml
   mvc:
     view:
       prefix: ''

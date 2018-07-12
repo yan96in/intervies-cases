@@ -11,6 +11,16 @@ todo:
 - websocket
 - stomp
 - webflux
+- ehcache
+- redis/jedis
+- mongodb
+- bean validator
+- page pagination
+- vue/reactjs/angularjs
+- jvm
+- concurrent
+- batch commit
+- code generator
 ---
 done:
 - html draggable
