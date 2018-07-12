@@ -1,3 +1,4 @@
 - [get和post的区别](http://www.w3school.com.cn/tags/html_ref_httpmethods.asp)
 - 操作工具:xshell/xmanager,putty,filezilla,flashfxp
 - [接口和抽象类的区别,为什么要用接口](https://blog.csdn.net/nvd11/article/details/41129935)
+- [redis主从切换](https://www.cnblogs.com/ruiati/p/6374145.html)
