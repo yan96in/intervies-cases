@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用线程嵌套交互数据</title>
+</head>
+<body onload="pageload();">
+<fieldset>
+    <p id="pStatus"></p>
+    <input type="text" id="txtNum">
+    <input type="button" id="btnAdd" value="请求" onclick="btnSend_Click();">
+</fieldset>
+
+<script>
+    function $$(id) {
+        return document.getElementById(id);
+    }
+
+    var objWorker = new Worker('js/10-9.js');
+
+    function pageload() {
+        objWorker.addEventListener('message', function (ev) {
+            $$('pStatus').style.display = 'block';
+            $$('pStatus').innerHTML += ev.data;
+        })
+    }
+
+    function btnSend_Click() {
+        var strTxtValue = $$('txtNum').value;
+        if (strTxtValue.length > 0) {
+            objWorker.postMessage(strTxtValue);
+            $$('txtNum').value = "";
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用getCurrentPosition方法获取出错数据信息</title>
+</head>
+<body onload="pageload();">
+<fieldset>
+    <legend>线程传递JSON对象</legend>
+    <p id="pStatus"></p>
+</fieldset>
+
+<script>
+    function $$(id) {
+        return document.getElementById(id);
+    }
+
+    var objWorker = new Worker('js/10-8.js');
+
+    function pageload() {
+        objWorker.addEventListener('message', function (ev) {
+            var strHTML = "";
+            var evData = ev.data;
+            console.log(evData);
+            for (var i in evData) {
+                strHTML += "<span>" + i + " :";
+                strHTML += "<b>" + evData[i] + " </b></span><br>";
+            }
+            $$('pStatus').style.display = 'block';
+            $$('pStatus').innerHTML = strHTML;
+        }, false);
+        objWorker.postMessage("");
+    }
+</script>
+</body>
+</html>

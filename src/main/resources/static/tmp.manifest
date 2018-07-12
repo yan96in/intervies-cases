@@ -1,0 +1,14 @@
+CACHE MANIFEST
+#version 0.0.0
+
+CACHE:
+#带相对路径的资源文件
+js/10-7.js
+
+NETWORK:
+#列出在线时需要访问的资源文件
+*
+
+FALLBACK:
+#以成对形式列出不可访问文件的替补资源文件
+js/10-7.js js//10-7.bak.js
