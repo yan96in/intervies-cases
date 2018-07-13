@@ -8,7 +8,7 @@ import net.sf.ehcache.Element;
  * @author Administrator
  *
  */
-public class EhCache1 {
+public class Ehcache1 {
 
     public static void main(String[] args) {
         //创建一个缓存管理器

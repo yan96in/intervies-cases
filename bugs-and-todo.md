@@ -21,6 +21,9 @@ todo:
 - concurrent
 - batch commit
 - code generator
+- memcached
+- jmm
+- jenkins
 ---
 done:
 - html draggable
