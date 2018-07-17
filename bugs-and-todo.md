@@ -4,13 +4,14 @@ bugs:
 - autowired mapper  bean not found : indingException: Invalid bound statement (not found)
 ----
 todo:
-- spring security
+- spring batch demo
+- spring cache demo
 - transactional
 - log
 - advanced mybatis
 - websocket
 - stomp
-- webflux
+- webflux demo
 - ehcache
 - redis/jedis
 - mongodb
@@ -27,3 +28,4 @@ todo:
 ---
 done:
 - html draggable
+- spring security

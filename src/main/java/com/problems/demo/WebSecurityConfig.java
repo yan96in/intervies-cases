@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
     public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Value("${spring.profiles}")
+    //FIXME
+    //@Value("${spring.profiles}")
     private String env;
 
     @Override
@@ -23,8 +24,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 		}*/
         http.headers().frameOptions().disable();
         http
-                .formLogin().loginPage("/login.html").loginProcessingUrl("/login").permitAll()
-                .defaultSuccessUrl("index.html").failureUrl("error.html")
+                .formLogin()
+               // .loginPage("/login.html").loginProcessingUrl("/login").permitAll()
+                .defaultSuccessUrl("/index.html")
+                 //.defaultSuccessUrl("/") // not worked,why?
+                .failureUrl("/error.html")
 
                 .and()
                 .logout().logoutUrl("/logout")
